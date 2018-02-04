@@ -315,12 +315,12 @@
 // The minimal temperature defines the temperature below which the heater will not be enabled It is used
 // to check that the wiring to the thermistor is not broken.
 // Otherwise this would lead to the heater being powered on all the time.
-#define HEATER_0_MINTEMP 15
+#define HEATER_0_MINTEMP 5
 #define HEATER_1_MINTEMP 5
 #define HEATER_2_MINTEMP 5
 #define HEATER_3_MINTEMP 5
 #define HEATER_4_MINTEMP 5
-#define BED_MINTEMP 15
+#define BED_MINTEMP 5
 
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
@@ -410,9 +410,16 @@
 //#define  DEFAULT_bedKd 1675.16
 
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
-#define  DEFAULT_bedKp 370.73
-#define  DEFAULT_bedKi 72.99
-#define  DEFAULT_bedKd 470.74
+
+// 90-degree insulated run - before PEI.
+//#define  DEFAULT_bedKp 162.22
+//#define  DEFAULT_bedKi 24.15
+//#define  DEFAULT_bedKd 272.41
+
+// 90-degree insulated - after PEI - from a hot bed
+#define  DEFAULT_bedKp 394.45
+#define  DEFAULT_bedKi 77.66
+#define  DEFAULT_bedKd 500.85
 
 #endif // PIDTEMPBED
 

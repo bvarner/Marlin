@@ -550,7 +550,7 @@
    Override with M203
                                         X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
 */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 3, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 12, 120 }
 
 /**
    Default Max Acceleration (change/s) change = mm/s
@@ -568,8 +568,8 @@
      M204 R    Retract Acceleration
      M204 T    Travel Acceleration
 */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
+#define DEFAULT_ACCELERATION          1500    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  1500    // E acceleration for retracts
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
@@ -697,9 +697,9 @@
         O-- FRONT --+
       (0,0)
 */
-#define X_PROBE_OFFSET_FROM_EXTRUDER 11  // X offset: -left  +right  [of the nozzle]
-#define Y_PROBE_OFFSET_FROM_EXTRUDER 2  // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+#define X_PROBE_OFFSET_FROM_EXTRUDER 13  // X offset: -left  +right  [of the nozzle]
+#define Y_PROBE_OFFSET_FROM_EXTRUDER 3  // Y offset: -front +behind [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.525   // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 8000
@@ -713,7 +713,7 @@
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
 //   Set to 3 or more for slow probes, averaging the results.
-//#define MULTIPLE_PROBING 2
+#define MULTIPLE_PROBING 2
 
 /**
    Z probes require clearance when deploying, stowing, and moving between
@@ -803,7 +803,7 @@
 // Using information above, setting travel limits to...
 #define X_MIN_POS -19
 #define Y_MIN_POS -17
-#define Z_MIN_POS 0.23
+#define Z_MIN_POS 0.1
 
 #define X_MAX_POS 200
 #define Y_MAX_POS 200
@@ -1060,7 +1060,7 @@
 
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (4*60)
+#define HOMING_FEEDRATE_Z  (800)
 
 // @section calibrate
 
@@ -1092,31 +1092,32 @@
       +-------------->X     +-------------->X     +-------------->Y
        XY_SKEW_FACTOR        XZ_SKEW_FACTOR        YZ_SKEW_FACTOR
 */
-//#define SKEW_CORRECTION
+#define SKEW_CORRECTION
 
 #if ENABLED(SKEW_CORRECTION)
 // Input all length measurements here:
-#define XY_DIAG_AC 282.8427124746
-#define XY_DIAG_BD 282.8427124746
-#define XY_SIDE_AD 200
+#define XY_DIAG_AC 141.04
+#define XY_DIAG_BD 140.94
+#define XY_SIDE_AD 99.85
 
 // Or, set the default skew factors directly here
 // to override the above measurements:
-#define XY_SKEW_FACTOR 0.0
+//#define XY_SKEW_FACTOR 0.0
 
-//#define SKEW_CORRECTION_FOR_Z
+#define SKEW_CORRECTION_FOR_Z
 #if ENABLED(SKEW_CORRECTION_FOR_Z)
-#define XZ_DIAG_AC 282.8427124746
-#define XZ_DIAG_BD 282.8427124746
-#define YZ_DIAG_AC 282.8427124746
-#define YZ_DIAG_BD 282.8427124746
-#define YZ_SIDE_AD 200
-#define XZ_SKEW_FACTOR 0.0
-#define YZ_SKEW_FACTOR 0.0
+#define XZ_DIAG_AC 141.68
+#define XZ_DIAG_BD 141.10
+#define XZ_SIDE_AD 99.76
+#define YZ_DIAG_AC 141.25
+#define YZ_DIAG_BD 141.41
+#define YZ_SIDE_AD 99.40
+//#define XZ_SKEW_FACTOR 0.0
+//#define YZ_SKEW_FACTOR 0.0
 #endif
 
 // Enable this option for M852 to set skew at runtime
-//#define SKEW_CORRECTION_GCODE
+#define SKEW_CORRECTION_GCODE
 #endif
 
 //=============================================================================
@@ -1184,7 +1185,7 @@
       P1  Raise the nozzle always to Z-park height.
       P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
 */
-//#define NOZZLE_PARK_FEATURE
+#define NOZZLE_PARK_FEATURE
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
 // Specify a park position as { X, Y, Z }

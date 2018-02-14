@@ -676,10 +676,10 @@
  * K=0 means advance disabled.
  * See Marlin documentation for calibration instructions.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 
 #if ENABLED(LIN_ADVANCE)
-  #define LIN_ADVANCE_K 75
+  #define LIN_ADVANCE_K 0
 
   /**
    * Some Slicers produce Gcode with randomly jumping extrusion widths occasionally.
@@ -876,7 +876,7 @@
  * Requires NOZZLE_PARK_FEATURE.
  * This feature is required for the default FILAMENT_RUNOUT_SCRIPT.
  */
-//#define ADVANCED_PAUSE_FEATURE
+#define ADVANCED_PAUSE_FEATURE
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
   #define PAUSE_PARK_RETRACT_FEEDRATE 60      // Initial retract feedrate in mm/s
   #define PAUSE_PARK_RETRACT_LENGTH 2         // Initial retract in mm

@@ -699,7 +699,7 @@
 */
 #define X_PROBE_OFFSET_FROM_EXTRUDER 13  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 3  // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.4   // Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.35   // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 8000
@@ -708,12 +708,12 @@
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Speed for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 4)
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
 //   Set to 3 or more for slow probes, averaging the results.
-#define MULTIPLE_PROBING 2
+#define MULTIPLE_PROBING 3
 
 /**
    Z probes require clearance when deploying, stowing, and moving between
@@ -803,11 +803,11 @@
 // Using information above, setting travel limits to...
 #define X_MIN_POS -21
 #define Y_MIN_POS -19
-#define Z_MIN_POS 0
+#define Z_MIN_POS 0.15
 
 #define X_MAX_POS 200
 #define Y_MAX_POS 200
-#define Z_MAX_POS 201
+#define Z_MAX_POS 210
 
 /**
    Software Endstops
@@ -932,9 +932,9 @@
 #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
 // Set the boundaries for probing (where the probe can reach).
-#define LEFT_PROBE_BED_POSITION 0
+#define LEFT_PROBE_BED_POSITION 2
 #define RIGHT_PROBE_BED_POSITION 188
-#define FRONT_PROBE_BED_POSITION 0
+#define FRONT_PROBE_BED_POSITION 5
 #define BACK_PROBE_BED_POSITION 190
 
 // The Z probe minimum outer margin (to validate G29 parameters).
@@ -1052,7 +1052,7 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT 0
+  #define Z_SAFE_HOMING_X_POINT 20
   #define Z_SAFE_HOMING_Y_POINT 0
 //  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
 //  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axes (G28).

@@ -354,10 +354,15 @@
 
 // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
+// Varnerized Prusa
+#define  DEFAULT_Kp 36.72
+#define  DEFAULT_Ki 3.93
+#define  DEFAULT_Kd 85.73
+
 // Ultimaker
-#define  DEFAULT_Kp 22.2
-#define  DEFAULT_Ki 1.08
-#define  DEFAULT_Kd 114
+//#define  DEFAULT_Kp 22.2
+//#define  DEFAULT_Ki 1.08
+//#define  DEFAULT_Kd 114
 
 // MakerGear
 //#define  DEFAULT_Kp 7.0
@@ -580,8 +585,8 @@
    When changing speed and `, if the difference is less than the
    value set here, it may happen instantaneously.
 */
-#define DEFAULT_XJERK                 10.0
-#define DEFAULT_YJERK                 10.0
+#define DEFAULT_XJERK                  5.0
+#define DEFAULT_YJERK                  5.0
 #define DEFAULT_ZJERK                  0.3
 #define DEFAULT_EJERK                  2.0
 
@@ -795,18 +800,17 @@
 
 // The size of the print bed
 // MK3 bed is 214x214, nonprintable 7mm padding.
-// Home (0,0, is at (19,12) from the x-y endstops.
 #define X_BED_SIZE 200
-#define Y_BED_SIZE 200
+#define Y_BED_SIZE 198
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 // Using information above, setting travel limits to...
 #define X_MIN_POS -21
-#define Y_MIN_POS -19
+#define Y_MIN_POS -17
 #define Z_MIN_POS 0.15
 
 #define X_MAX_POS 200
-#define Y_MAX_POS 200
+#define Y_MAX_POS 198
 #define Z_MAX_POS 210
 
 /**
@@ -919,7 +923,7 @@
 #if ENABLED(G26_MESH_VALIDATION)
 #define MESH_TEST_NOZZLE_SIZE     0.4   // (mm) Diameter of primary nozzle.
 #define MESH_TEST_LAYER_HEIGHT    0.2   // (mm) Default layer height for the G26 Mesh Validation Tool.
-#define MESH_TEST_HOTEND_TEMP   205.0   // (°C) Default nozzle temperature for the G26 Mesh Validation Tool.
+#define MESH_TEST_HOTEND_TEMP   210.0   // (°C) Default nozzle temperature for the G26 Mesh Validation Tool.
 #define MESH_TEST_BED_TEMP       60.0   // (°C) Default bed temperature for the G26 Mesh Validation Tool.
 #endif
 
@@ -1052,8 +1056,8 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT 20
-  #define Z_SAFE_HOMING_Y_POINT 0
+#define Z_SAFE_HOMING_X_POINT 20
+#define Z_SAFE_HOMING_Y_POINT 0
 //  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
 //  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axes (G28).
 #endif
@@ -1398,7 +1402,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-#define REVERSE_ENCODER_DIRECTION
+//#define REVERSE_ENCODER_DIRECTION
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -1430,7 +1434,7 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 25
+#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 5
 #define LCD_FEEDBACK_FREQUENCY_HZ 1000
 
 //

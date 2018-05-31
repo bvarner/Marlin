@@ -416,15 +416,10 @@
 
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 
-// 90-degree insulated run - before PEI.
-//#define  DEFAULT_bedKp 162.22
-//#define  DEFAULT_bedKi 24.15
-//#define  DEFAULT_bedKd 272.41
-
-// 90-degree insulated - after PEI - from a hot bed
-#define  DEFAULT_bedKp 394.45
-#define  DEFAULT_bedKi 77.66
-#define  DEFAULT_bedKd 500.85
+// 90-degree insulated with IKEA cork and thin PEI.
+#define  DEFAULT_bedKp 481.28
+#define  DEFAULT_bedKi 93.26
+#define  DEFAULT_bedKd 620.91
 
 #endif // PIDTEMPBED
 
@@ -563,7 +558,7 @@
    Override with M201
                                         X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
 */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 9000, 9000, 500, 10000 }
 
 /**
    Default Acceleration (change/s) change = mm/s
@@ -587,7 +582,7 @@
 */
 #define DEFAULT_XJERK                  5.0
 #define DEFAULT_YJERK                  5.0
-#define DEFAULT_ZJERK                  0.3
+#define DEFAULT_ZJERK                  0.2
 #define DEFAULT_EJERK                  2.0
 
 //===========================================================================
@@ -718,7 +713,7 @@
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
 //   Set to 3 or more for slow probes, averaging the results.
-#define MULTIPLE_PROBING 3
+#define MULTIPLE_PROBING 2
 
 /**
    Z probes require clearance when deploying, stowing, and moving between
@@ -785,7 +780,7 @@
 
 // @section homing
 
-//#define NO_MOTION_BEFORE_HOMING  // Inhibit movement until all axes have been homed
+#define NO_MOTION_BEFORE_HOMING  // Inhibit movement until all axes have been homed
 
 //#define Z_HOMING_HEIGHT 4  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
 // Be sure you have this distance over your Z_MAX_POS in case.
@@ -932,7 +927,7 @@
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
 // Set the number of grid points per dimension.
-#define GRID_MAX_POINTS_X 4
+#define GRID_MAX_POINTS_X 3
 #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
 // Set the boundaries for probing (where the probe can reach).
@@ -1063,7 +1058,7 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (50*60)
+#define HOMING_FEEDRATE_XY (120*60)
 #define HOMING_FEEDRATE_Z  (800)
 
 // @section calibrate

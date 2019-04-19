@@ -638,13 +638,16 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 133 }
+// As measured with a print of the YACS square....
+// X axis: 100 * 104 / 103 = 100.970873786
+// Y axis: 100 * 104 / 103 = 100.970873786
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 200, 200, 12, 120 }
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, 15, 120 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -842,7 +845,7 @@
  */
 #define Z_CLEARANCE_DEPLOY_PROBE    0 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
-#define Z_CLEARANCE_MULTI_PROBE     1.5 // Z Clearance between multiple probes
+#define Z_CLEARANCE_MULTI_PROBE     1 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
 
 #define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
@@ -1212,12 +1215,12 @@
  *     XY_SKEW_FACTOR        XZ_SKEW_FACTOR        YZ_SKEW_FACTOR
  */
 
-//#define SKEW_CORRECTION
+#define SKEW_CORRECTION
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
-  #define XY_DIAG_AC 141.04
-  #define XY_DIAG_BD 140.94
-  #define XY_SIDE_AD 99.85
+  #define XY_DIAG_AC 140.80
+  #define XY_DIAG_BD 140.92
+  #define XY_SIDE_AD 102.92
 
   // Or, set the default skew factors directly here
   // to override the above measurements:
@@ -1237,7 +1240,7 @@
   #endif
 
   // Enable this option for M852 to set skew at runtime
-  //#define SKEW_CORRECTION_GCODE
+  #define SKEW_CORRECTION_GCODE
 #endif
 
 //=============================================================================

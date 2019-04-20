@@ -862,7 +862,7 @@ void lcd_quick_feedback(const bool clear_buttons) {
       lcd_setstatusPGM(PSTR(MSG_PRINT_ABORTED), -1);
       lcd_return_to_status();
       #if ENABLED(PARK_HEAD_ON_PAUSE)
-        enqueue_and_echo_command_P(PSTR("G27 P2"));
+        enqueue_and_echo_commands_P(PSTR("G27 P2"));
       #endif
     }
 

@@ -637,17 +637,19 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 133 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.970873786, 100.970873786, 400, 144.001732352 }
 // As measured with a print of the YACS square....
 // X axis: 100 * 104 / 103 = 100.970873786
 // Y axis: 100 * 104 / 103 = 100.970873786
+// E was initially 133steps/mm
+// E axis: 133 * 100 / (120 - 27.64)
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 200, 200, 15, 120 }
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, 20, 120 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -655,7 +657,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 200, 5000 }
+#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 500, 5000 }
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -665,9 +667,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          1250    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  1250    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1250    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          1500    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  1500    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk (mm/s)
@@ -679,8 +681,8 @@
  */
 #define DEFAULT_XJERK                 3.0
 #define DEFAULT_YJERK                 3.0
-#define DEFAULT_ZJERK                 0.4
-#define DEFAULT_EJERK                 2.5
+#define DEFAULT_ZJERK                 0.5
+#define DEFAULT_EJERK                 4.0
 
 /**
  * S-Curve Acceleration
@@ -819,10 +821,10 @@
 #define XY_PROBE_SPEED 10500
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST (HOMING_FEEDRATE_Z * 2)
+#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (HOMING_FEEDRATE_Z / 2)
+#define Z_PROBE_SPEED_SLOW HOMING_FEEDRATE_Z * (2/3)
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.

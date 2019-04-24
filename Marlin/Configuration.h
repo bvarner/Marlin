@@ -637,12 +637,12 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.970873786, 100.970873786, 400, 144.001732352 }
-// As measured with a print of the YACS square....
-// X axis: 100 * 104 / 103 = 100.970873786
-// Y axis: 100 * 104 / 103 = 100.970873786
-// E was initially 133steps/mm
-// E axis: 133 * 100 / (120 - 27.64)
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.60, 100.90, 400, 144 }
+// Steps per unit for x/y adjusted over a series of 20x20 calibration cubes.
+// Z axis based on TR8-2 physical properties, caliper measurements confirm.
+// Extruder settings were derived from multiple attempts at tuning extrusion
+// from measured filament advancement. Eventually, it was tweaked between
+// prints.
 
 /**
  * Default Max Feed Rate (mm/s)

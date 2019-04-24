@@ -424,8 +424,9 @@
 // @section lcd
 
 #if ENABLED(ULTIPANEL)
-  #define MANUAL_FEEDRATE {2700, 2700, 1000, 100} // Feedrates for manual moves along X, Y, Z, E from panel
+  #define MANUAL_FEEDRATE {2700, 2700, 1000, 4 * 60} // Feedrates for manual moves along X, Y, Z, E from panel
   #define ULTIPANEL_FEEDMULTIPLY  // Comment to disable setting feedrate multiplier via encoder
+  #define ULTRALCD_CONCISE // Comment to disable the 'concise' display on 4x20 displays -- mimmicing the output format from Prusa Firmware.
 #endif
 
 // @section extras

@@ -732,6 +732,12 @@ Possible status screens:
        |T000/000D   Z 000.00|
        |F100%  SD100% T--:--|
        |01234567890123456789|
+
+// ULTRALCD_CONCISE
+20x4   |T000/000D   Z 000.00|
+       |B000/000D   F100%   |
+       |USB100%     T--:--  |
+       |01234567890123456789|       
 */
 static void lcd_implementation_status_screen() {
   const bool blink = lcd_blink();
@@ -766,30 +772,34 @@ static void lcd_implementation_status_screen() {
     #endif // HOTENDS > 1 || HAS_HEATED_BED
 
   #else // LCD_WIDTH >= 20
-
-    //
-    // Hotend 0 Temperature
-    //
-    _draw_heater_status(0, LCD_STR_THERMOMETER[0], blink);
-
-    //
-    // Hotend 1 or Bed Temperature
-    //
-    #if HOTENDS > 1 || HAS_HEATED_BED
-      lcd.setCursor(10, 0);
-      #if HOTENDS > 1
-        _draw_heater_status(1, LCD_STR_THERMOMETER[0], blink);
-      #else
-        _draw_heater_status(-1, (
-          #if HAS_LEVELING
-            planner.leveling_active && blink ? '_' :
-          #endif
-          LCD_BEDTEMP_CHAR
-        ), blink);
-      #endif
-
-    #endif // HOTENDS > 1 || HAS_HEATED_BED
-
+    #if ENABLED(ULTRALCD_CONCISE)
+      _draw_heater_status(0, LCD_STR_THERMOMETER[0], blink); // 9chars hotend 1
+      lcd_printPGM(PSTR("   ")); // 3 spaces
+      _draw_axis_value(Z_AXIS, ftostr52sp(LOGICAL_Z_POSITION(current_position[Z_AXIS])), blink); // Z-Axis coords.
+    #else
+      //
+      // Hotend 0 Temperature
+      //
+      _draw_heater_status(0, LCD_STR_THERMOMETER[0], blink);
+  
+      //
+      // Hotend 1 or Bed Temperature
+      //
+      #if HOTENDS > 1 || HAS_HEATED_BED
+        lcd.setCursor(10, 0);
+        #if HOTENDS > 1
+          _draw_heater_status(1, LCD_STR_THERMOMETER[0], blink);
+        #else
+          _draw_heater_status(-1, (
+            #if HAS_LEVELING
+              planner.leveling_active && blink ? '_' :
+            #endif
+            LCD_BEDTEMP_CHAR
+          ), blink);
+        #endif
+  
+      #endif // HOTENDS > 1 || HAS_HEATED_BED
+    #endif // ULTRALCD_CONCISE
   #endif // LCD_WIDTH >= 20
 
   //
@@ -811,43 +821,59 @@ static void lcd_implementation_status_screen() {
       #endif // SDSUPPORT
 
     #else // LCD_WIDTH >= 20
-
       lcd.setCursor(0, 1);
-
-      // If the first line has two extruder temps,
-      // show more temperatures on the next line
-
-      #if HOTENDS > 2 || (HOTENDS > 1 && HAS_HEATED_BED)
-
-        #if HOTENDS > 2
-          _draw_heater_status(2, LCD_STR_THERMOMETER[0], blink);
-          lcd.setCursor(10, 1);
-        #endif
-
-        _draw_heater_status(-1, (
-          #if HAS_LEVELING
-            planner.leveling_active && blink ? '_' :
+      #if ENABLED(ULTRALCD_CONCISE)
+          // Heated bed.
+          #if HAS_HEATED_BED
+            _draw_heater_status(-1, (
+              #if HAS_LEVELING
+                planner.leveling_active && blink ? '_' :
+              #endif
+              LCD_BEDTEMP_CHAR), blink);
+          #else
+            lcd_printPGM(PSTR("         "));
           #endif
-          LCD_BEDTEMP_CHAR
-        ), blink);
-
-      #else // HOTENDS <= 2 && (HOTENDS <= 1 || !HAS_HEATED_BED)
-
-        _draw_axis_value(X_AXIS, ftostr4sign(LOGICAL_X_POSITION(current_position[X_AXIS])), blink);
-
-        lcd.write(' ');
-
-        _draw_axis_value(Y_AXIS, ftostr4sign(LOGICAL_Y_POSITION(current_position[Y_AXIS])), blink);
-
-      #endif // HOTENDS <= 2 && (HOTENDS <= 1 || !HAS_HEATED_BED)
-
+          lcd_printPGM(PSTR("   "));
+          lcd.print((char)LCD_FEEDRATE_CHAR);
+          lcd.print(itostr3(feedrate_percentage));
+          lcd.write('%');
+      #else
+        // If the first line has two extruder temps,
+        // show more temperatures on the next line
+  
+        #if HOTENDS > 2 || (HOTENDS > 1 && HAS_HEATED_BED)
+  
+          #if HOTENDS > 2
+            _draw_heater_status(2, LCD_STR_THERMOMETER[0], blink);
+            lcd.setCursor(10, 1);
+          #endif
+  
+          _draw_heater_status(-1, (
+            #if HAS_LEVELING
+              planner.leveling_active && blink ? '_' :
+            #endif
+            LCD_BEDTEMP_CHAR
+          ), blink);
+  
+        #else // HOTENDS <= 2 && (HOTENDS <= 1 || !HAS_HEATED_BED)
+  
+          _draw_axis_value(X_AXIS, ftostr4sign(LOGICAL_X_POSITION(current_position[X_AXIS])), blink);
+  
+          lcd.write(' ');
+  
+          _draw_axis_value(Y_AXIS, ftostr4sign(LOGICAL_Y_POSITION(current_position[Y_AXIS])), blink);
+  
+        #endif // HOTENDS <= 2 && (HOTENDS <= 1 || !HAS_HEATED_BED)
+      #endif // ULTRALCD_CONCISE
     #endif // LCD_WIDTH >= 20
 
-    lcd.setCursor(LCD_WIDTH - 8, 1);
-    _draw_axis_value(Z_AXIS, ftostr52sp(LOGICAL_Z_POSITION(current_position[Z_AXIS])), blink);
+    #if DISABLED(ULTRALCD_CONCISE)
+      lcd.setCursor(LCD_WIDTH - 8, 1);
+      _draw_axis_value(Z_AXIS, ftostr52sp(LOGICAL_Z_POSITION(current_position[Z_AXIS])), blink);
 
-    #if HAS_LEVELING && !HAS_HEATED_BED
-      lcd.write(planner.leveling_active || blink ? '_' : ' ');
+      #if HAS_LEVELING && !HAS_HEATED_BED
+        lcd.write(planner.leveling_active || blink ? '_' : ' ');
+      #endif
     #endif
 
   #endif // LCD_HEIGHT > 2
@@ -857,32 +883,59 @@ static void lcd_implementation_status_screen() {
   //
 
   #if LCD_HEIGHT > 3
-
     lcd.setCursor(0, 2);
-    lcd.print((char)LCD_FEEDRATE_CHAR);
-    lcd.print(itostr3(feedrate_percentage));
-    lcd.write('%');
 
-    #if LCD_WIDTH >= 20 && ENABLED(SDSUPPORT)
-
-      lcd.setCursor(7, 2);
-      lcd_printPGM(PSTR("SD"));
-      if (IS_SD_PRINTING)
+    #if ENABLED(ULTRALCD_CONCISE)
+      // TODO: Add USB Printing detection, ala the Prusa Firmware.
+      // For now, assume everything is SD.
+      #if DISABLED(LCD_SET_PROGRESS_MANUALLY)
+        const uint8_t progress_bar_percent = card.percentDone();
+      #endif
+      if (IS_SD_PRINTING) {
+        lcd_printPGM(PSTR(" SD"));
         lcd.print(itostr3(card.percentDone()));
-      else
-        lcd_printPGM(PSTR("---"));
+        lcd.write('%');
+      } else if (progress_bar_percent > 2) {
+        lcd_printPGM(PSTR("   "));
+        lcd.print(itostr3(progress_bar_percent));
+        lcd.write('%');
+      } else {
+        lcd_printPGM(PSTR("   ---%"));
+      }
+      lcd_printPGM(PSTR("             "));
+      // time elapsed.
+      char buffer[10];
+      duration_t elapsed = print_job_timer.duration();
+      uint8_t len = elapsed.toDigital(buffer);
+
+      lcd.setCursor(LCD_WIDTH - len - 3, 2);
+      lcd.print((char)LCD_CLOCK_CHAR);
+      lcd_print(buffer);
+    #else
+      lcd.print((char)LCD_FEEDRATE_CHAR);
+      lcd.print(itostr3(feedrate_percentage));
       lcd.write('%');
-
-    #endif // LCD_WIDTH >= 20 && SDSUPPORT
-
-    char buffer[10];
-    duration_t elapsed = print_job_timer.duration();
-    uint8_t len = elapsed.toDigital(buffer);
-
-    lcd.setCursor(LCD_WIDTH - len - 1, 2);
-    lcd.print((char)LCD_CLOCK_CHAR);
-    lcd_print(buffer);
-
+  
+      #if LCD_WIDTH >= 20 && ENABLED(SDSUPPORT)
+  
+        lcd.setCursor(7, 2);
+        lcd_printPGM(PSTR("SD"));
+        if (IS_SD_PRINTING)
+          lcd.print(itostr3(card.percentDone()));
+        else
+          lcd_printPGM(PSTR("---"));
+        lcd.write('%');
+  
+      #endif // LCD_WIDTH >= 20 && SDSUPPORT
+  
+      char buffer[10];
+      duration_t elapsed = print_job_timer.duration();
+      uint8_t len = elapsed.toDigital(buffer);
+  
+      lcd.setCursor(LCD_WIDTH - len - 1, 2);
+      lcd.print((char)LCD_CLOCK_CHAR);
+      lcd_print(buffer);
+    #endif // ULTRALCD_CONCISE
   #endif // LCD_HEIGHT > 3
 
   //

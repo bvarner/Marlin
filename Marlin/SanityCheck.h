@@ -421,6 +421,17 @@ static_assert(X_MAX_LENGTH >= X_BED_SIZE && Y_MAX_LENGTH >= Y_BED_SIZE,
   #error "Graphical LCD is required for SHOW_CUSTOM_BOOTSCREEN and CUSTOM_STATUS_SCREEN_IMAGE."
 #endif
 
+// Concise message format for ultipanels requires a LCD of the proper size, and M73 support.
+#if ENABLED(ULTIPANEL) && ENABLED(ULTRALCD_CONCISE)
+  #if LCD_WIDTH < 20 || LCD_HEIGHT < 4
+    #error "ULTRALCD_CONCISE requires a 20x4 LCD."
+  #endif
+  #if DISABLED(LCD_SET_PROGRESS_MANUALLY) 
+    #error "ULTRALCD_CONCISE requires LCD_SET_PROGRESS_MANUALLY."
+  #endif
+#endif
+
+
 /**
  * SD File Sorting
  */

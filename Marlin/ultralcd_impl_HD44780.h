@@ -328,13 +328,13 @@ static void lcd_set_custom_characters(
   };
 
   const static PROGMEM byte feedrate[8] = {
-    B11100,
-    B10000,
-    B11000,
-    B10111,
-    B00101,
-    B00110,
-    B00101,
+    B00000,
+    B00100,
+    B10010,
+    B01001,
+    B10010,
+    B00100,
+    B00000,
     B00000
   };
 

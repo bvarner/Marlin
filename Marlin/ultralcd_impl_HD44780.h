@@ -279,6 +279,17 @@ static void lcd_set_custom_characters(
     B00000
   };
 
+  const static PROGMEM byte bedTempLeveled[8] = {
+    B00000,
+    B11111,
+    B10101,
+    B10001,
+    B10101,
+    B11111,
+    B00000,
+    B11111
+  };
+
   const static PROGMEM byte degree[8] = {
     B01100,
     B10010,
@@ -403,7 +414,13 @@ static void lcd_set_custom_characters(
     else
   #endif
     { // Info Screen uses 5 special characters
-      createChar_P(LCD_BEDTEMP_CHAR, bedTemp);
+      createChar_P(LCD_BEDTEMP_CHAR, (
+        // Use the bed-leveling (underlined) version of the character.
+        #if HAS_LEVELING
+          planner.leveling_active ? bedTempLeveled :
+        #endif
+        bedTemp
+      ));
       createChar_P(LCD_DEGREE_CHAR, degree);
       createChar_P(LCD_STR_THERMOMETER[0], thermometer);
       createChar_P(LCD_FEEDRATE_CHAR, feedrate);
@@ -825,11 +842,7 @@ static void lcd_implementation_status_screen() {
       #if ENABLED(ULTRALCD_CONCISE)
           // Heated bed.
           #if HAS_HEATED_BED
-            _draw_heater_status(-1, (
-              #if HAS_LEVELING
-                planner.leveling_active && blink ? '_' :
-              #endif
-              LCD_BEDTEMP_CHAR), blink);
+            _draw_heater_status(-1, LCD_BEDTEMP_CHAR, blink);
           #else
             lcd_printPGM(PSTR("         "));
           #endif

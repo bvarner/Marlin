@@ -221,6 +221,10 @@ static void createChar_P(const char c, const byte * const ptr) {
 #define CHARSET_INFO 1
 #define CHARSET_BOOT 2
 
+#if HAS_LEVELING
+static boolean heatbedLeveledChar;
+#endif
+
 static void lcd_set_custom_characters(
   #if ENABLED(LCD_PROGRESS_BAR) || ENABLED(SHOW_BOOTSCREEN)
     const uint8_t screen_charset=CHARSET_INFO
@@ -345,7 +349,7 @@ static void lcd_set_custom_characters(
     B00000
   };
 
-  #if ENABLED(LCD_PROGRESS_BAR)
+#if ENABLED(LCD_PROGRESS_BAR)
 
     // CHARSET_INFO
     const static PROGMEM byte progress[3][8] = { {
@@ -415,12 +419,13 @@ static void lcd_set_custom_characters(
   #endif
     { // Info Screen uses 5 special characters
       createChar_P(LCD_BEDTEMP_CHAR, (
-        // Use the bed-leveling (underlined) version of the character.
         #if HAS_LEVELING
           planner.leveling_active ? bedTempLeveled :
         #endif
-        bedTemp
-      ));
+        bedTemp));
+      #if HAS_LEVELING
+      heatbedLeveledChar = planner.leveling_active;
+      #endif
       createChar_P(LCD_DEGREE_CHAR, degree);
       createChar_P(LCD_STR_THERMOMETER[0], thermometer);
       createChar_P(LCD_FEEDRATE_CHAR, feedrate);
@@ -758,6 +763,14 @@ Possible status screens:
 */
 static void lcd_implementation_status_screen() {
   const bool blink = lcd_blink();
+
+#if HAS_LEVELING
+  // check if we need to update character sets
+  if (heatbedLeveledChar != planner.leveling_active) {
+    lcd_set_custom_characters(CHARSET_INFO);
+  }
+#endif // HAS_LEVELING
+
 
   //
   // Line 1

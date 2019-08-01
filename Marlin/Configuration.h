@@ -401,10 +401,15 @@
 
   // Varnerized Knock-Off E3d V6
   // M303 C8 E0 S235
-  #define DEFAULT_Kp 25.82
-  #define DEFAULT_Ki 2.92
-  #define DEFAULT_Kd 57.12  
-
+  // RAMPS 1.4
+  // #define DEFAULT_Kp 25.82
+  // #define DEFAULT_Ki 2.92
+  // #define DEFAULT_Kd 57.12  
+  
+  // RAMPS 1.6
+  #define DEFAULT_Kp 39.96
+  #define DEFAULT_Ki 5.81
+  #define DEFAULT_Kd 68.74
 #endif // PIDTEMP
 
 //===========================================================================
@@ -465,10 +470,16 @@
   //#define DEFAULT_bedKd 1401.20
 
   // Autotuned 90 degree -- 8 cycle
+  // RAMPS 1.4 with IRZL mosfet...
   // M303 C8 E-1 S90
-  #define DEFAULT_bedKp 182.79
-  #define DEFAULT_bedKi 6.54
-  #define DEFAULT_bedKd 1276.54
+  //#define DEFAULT_bedKp 182.79
+  //#define DEFAULT_bedKi 6.54
+  //#define DEFAULT_bedKd 1276.54
+
+  // RAMPS 1.6 board
+  #define DEFAULT_bedKp 200.38
+  #define DEFAULT_bedKi 8.93
+  #define DEFAULT_bedKd 1124.45
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.  
 #endif // PIDTEMPBED
@@ -922,7 +933,7 @@
 #define Z_MIN_POS 0.15
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+#define Z_MAX_POS 205
 
 /**
  * Software Endstops
@@ -1054,8 +1065,8 @@
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 3
-  #define GRID_MAX_POINTS_Y 3
+  #define GRID_MAX_POINTS_X 5
+  #define GRID_MAX_POINTS_Y 5
 
   // Set the boundaries for probing (where the probe can reach).
   #define LEFT_PROBE_BED_POSITION 24
@@ -1220,9 +1231,9 @@
 #define SKEW_CORRECTION
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
-  #define XY_DIAG_AC 140.80
-  #define XY_DIAG_BD 140.92
-  #define XY_SIDE_AD 102.92
+  #define XY_DIAG_AC 141.93
+  #define XY_DIAG_BD 142.02
+  #define XY_SIDE_AD 100.40
 
   // Or, set the default skew factors directly here
   // to override the above measurements:
@@ -1230,12 +1241,13 @@
 
   #define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
-    #define XZ_DIAG_AC 141.05
-    #define XZ_DIAG_BD 141.70
-    #define XZ_SIDE_AD 99.4
-    #define YZ_DIAG_AC 141.79
-    #define YZ_DIAG_BD 140.95
-    #define YZ_SIDE_AD 99.6
+    #define XZ_DIAG_AC 141.52
+    #define XZ_DIAG_BD 142.09
+    #define XZ_SIDE_AD 100.4
+
+    #define YZ_DIAG_AC 142.58
+    #define YZ_DIAG_BD 141.27
+    #define YZ_SIDE_AD 100.5
    
     //#define XZ_SKEW_FACTOR 0.0
     //#define YZ_SKEW_FACTOR 0.0

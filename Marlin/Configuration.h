@@ -660,7 +660,7 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 200, 200, 20, 120 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 25, 120 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -668,7 +668,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 500, 5000 }
+#define DEFAULT_MAX_ACCELERATION      { 9000, 9000, 500, 10000 }
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -690,8 +690,8 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define DEFAULT_XJERK                 3.0
-#define DEFAULT_YJERK                 3.0
+#define DEFAULT_XJERK                 7.0
+#define DEFAULT_YJERK                 7.0
 #define DEFAULT_ZJERK                 0.5
 #define DEFAULT_EJERK                 4.0
 
@@ -826,13 +826,13 @@
 #define MIN_PROBE_EDGE 0
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 10500
+#define XY_PROBE_SPEED 12000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST DEFAULT_MAX_FEEDRATE[2]
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW HOMING_FEEDRATE_Z * (2/3)
+#define Z_PROBE_SPEED_SLOW HOMING_FEEDRATE_Z
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
@@ -855,7 +855,7 @@
  */
 #define Z_CLEARANCE_DEPLOY_PROBE    0 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
-#define Z_CLEARANCE_MULTI_PROBE     0.5 // Z Clearance between multiple probes
+#define Z_CLEARANCE_MULTI_PROBE     0.25 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
 
 #define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
@@ -927,7 +927,7 @@
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
 #define Y_MIN_POS -2.5
-#define Z_MIN_POS 0.15
+#define Z_MIN_POS 0.1
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 205
@@ -1192,7 +1192,7 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (3000)
+#define HOMING_FEEDRATE_XY (4500)
 #define HOMING_FEEDRATE_Z  (1200)
 
 // @section calibrate
@@ -1302,11 +1302,11 @@
 
 // Preheat Constants
 #define PREHEAT_1_TEMP_HOTEND 180
-#define PREHEAT_1_TEMP_BED     70
+#define PREHEAT_1_TEMP_BED     65
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
-#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    90
+#define PREHEAT_2_TEMP_HOTEND 245
+#define PREHEAT_2_TEMP_BED    85
 #define PREHEAT_2_FAN_SPEED   100 // Value from 0 to 255
 
 /**

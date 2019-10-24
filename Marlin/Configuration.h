@@ -668,7 +668,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 9000, 9000, 500, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 9000, 9000, 1000, 10000 }
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -829,7 +829,7 @@
 #define XY_PROBE_SPEED 12000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST DEFAULT_MAX_FEEDRATE[2]
+#define Z_PROBE_SPEED_FAST 25 * 60
 
 // Feedrate (mm/m) for the "accurate" probe of each point
 #define Z_PROBE_SPEED_SLOW HOMING_FEEDRATE_Z
@@ -858,7 +858,7 @@
 #define Z_CLEARANCE_MULTI_PROBE     0.25 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
 
-#define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
+#define Z_PROBE_LOW_POINT          -4 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
 #define Z_PROBE_OFFSET_RANGE_MIN -10

@@ -917,7 +917,7 @@ static void lcd_implementation_status_screen() {
       #if DISABLED(LCD_SET_PROGRESS_MANUALLY)
         const uint8_t progress_bar_percent = card.percentDone();
       #endif
-      if (IS_SD_PRINTING) {
+      if (IS_SD_PRINTING()) {
         lcd_printPGM(PSTR(" SD"));
         lcd.print(itostr3(card.percentDone()));
         lcd.write('%');
@@ -946,7 +946,7 @@ static void lcd_implementation_status_screen() {
   
         lcd.setCursor(7, 2);
         lcd_printPGM(PSTR("SD"));
-        if (IS_SD_PRINTING)
+        if (IS_SD_PRINTING())
           lcd.print(itostr3(card.percentDone()));
         else
           lcd_printPGM(PSTR("---"));

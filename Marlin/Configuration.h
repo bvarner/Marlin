@@ -693,7 +693,7 @@
 #define DEFAULT_XJERK                 7.0
 #define DEFAULT_YJERK                 7.0
 #define DEFAULT_ZJERK                 0.5
-#define DEFAULT_EJERK                 4.0
+#define DEFAULT_EJERK                 2.5
 
 /**
  * S-Curve Acceleration
@@ -1239,14 +1239,14 @@
   // to override the above measurements:
   //#define XY_SKEW_FACTOR 0.0
 
-//  #define SKEW_CORRECTION_FOR_Z
+  #define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
     #define XZ_DIAG_AC 141.35
     #define XZ_DIAG_BD 142.14
     #define XZ_SIDE_AD 100.08
 
-    #define YZ_DIAG_AC 142.69
-    #define YZ_DIAG_BD 140.93
+    #define YZ_DIAG_AC 140.93
+    #define YZ_DIAG_BD 142.69
     #define YZ_SIDE_AD 100.08
    
     //#define XZ_SKEW_FACTOR 0.0
@@ -1914,13 +1914,13 @@
  * LED Type. Enable only one of the following two options.
  *
  */
-//#define RGB_LED
+#define RGB_LED
 //#define RGBW_LED
 
 #if ENABLED(RGB_LED) || ENABLED(RGBW_LED)
-  #define RGB_LED_R_PIN 34
-  #define RGB_LED_G_PIN 43
-  #define RGB_LED_B_PIN 35
+  #define RGB_LED_R_PIN SERVO0_PIN
+  #define RGB_LED_G_PIN SERVO1_PIN
+  #define RGB_LED_B_PIN SERVO2_PIN
   #define RGB_LED_W_PIN -1
 #endif
 

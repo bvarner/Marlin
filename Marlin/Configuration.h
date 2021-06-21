@@ -329,7 +329,7 @@
 
 // Extruder temperature must be close to target for this long before M109 returns success
 #define TEMP_RESIDENCY_TIME 3  // (seconds)
-#define TEMP_HYSTERESIS 5       // (degC) range of +/- temperatures considered "close" to the target one
+#define TEMP_HYSTERESIS 3       // (degC) range of +/- temperatures considered "close" to the target one
 #define TEMP_WINDOW     1       // (degC) Window around target to start the residency timer x degC early.
 
 // Bed temperature must be close to target for this long before M190 returns success
@@ -407,9 +407,10 @@
   // #define DEFAULT_Kd 57.12  
   
   // RAMPS 1.6
-  #define DEFAULT_Kp 39.96
-  #define DEFAULT_Ki 5.81
-  #define DEFAULT_Kd 68.74
+  // M303 C8 E0 S245
+  #define DEFAULT_Kp 24.91
+  #define DEFAULT_Ki 2.19
+  #define DEFAULT_Kd 70.91
 #endif // PIDTEMP
 
 //===========================================================================
@@ -476,10 +477,10 @@
   //#define DEFAULT_bedKi 6.54
   //#define DEFAULT_bedKd 1276.54
 
-  // RAMPS 1.6 board
-  #define DEFAULT_bedKp 200.38
-  #define DEFAULT_bedKi 8.93
-  #define DEFAULT_bedKd 1124.45
+  // RAMPS 1.6 board & MK53 12v Heated Bed through #12 Silicone Cable
+  #define DEFAULT_bedKp 178.87
+  #define DEFAULT_bedKi 8.03
+  #define DEFAULT_bedKd 996.40
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.  
 #endif // PIDTEMPBED
@@ -590,14 +591,14 @@
  *          TMC5130, TMC5130_STANDALONE
  * :['A4988', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE']
  */
-//#define X_DRIVER_TYPE  A4988
-//#define Y_DRIVER_TYPE  A4988
-//#define Z_DRIVER_TYPE  A4988
+#define X_DRIVER_TYPE  A4988
+#define Y_DRIVER_TYPE  A4988
+#define Z_DRIVER_TYPE  A4988
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
-//#define E0_DRIVER_TYPE A4988
-//#define E1_DRIVER_TYPE A4988
+#define E0_DRIVER_TYPE A4988
+#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
 //#define E4_DRIVER_TYPE A4988
@@ -648,7 +649,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.60, 100.90, 400, 144 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.60, 100.90, 400, 520 }
 // Steps per unit for x/y adjusted over a series of 20x20 calibration cubes.
 // Z axis based on TR8-2 physical properties, caliper measurements confirm.
 // Extruder settings were derived from multiple attempts at tuning extrusion
@@ -1918,9 +1919,9 @@
 //#define RGBW_LED
 
 #if ENABLED(RGB_LED) || ENABLED(RGBW_LED)
-  #define RGB_LED_R_PIN SERVO0_PIN
-  #define RGB_LED_G_PIN SERVO1_PIN
-  #define RGB_LED_B_PIN SERVO2_PIN
+  #define RGB_LED_R_PIN SERVO1_PIN
+  #define RGB_LED_G_PIN SERVO2_PIN
+  #define RGB_LED_B_PIN SERVO3_PIN
   #define RGB_LED_W_PIN -1
 #endif
 

@@ -123,7 +123,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+#define BAUDRATE 115200
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -408,9 +408,23 @@
   
   // RAMPS 1.6
   // M303 C8 E0 S245
-  #define DEFAULT_Kp 24.91
-  #define DEFAULT_Ki 2.19
-  #define DEFAULT_Kd 70.91
+  //#define DEFAULT_Kp 24.91
+  //#define DEFAULT_Ki 2.19
+  //#define DEFAULT_Kd 70.91
+
+  // RAMPS 1.6, E3d V6 Knockoff with silicone sock, skelestruder rockwool top.
+  // M393 C9 E0 S250
+  //#define DEFAULT_Kp 48.89
+  //#define DEFAULT_Ki 8.65
+  //#define DEFAULT_Kd 69.09
+
+  // RAMPS 1.6, E3d V6 Knockoff, 12v 40W heater, skelestruder rockwool top.
+  // M393 C9 E0 S250
+  #define DEFAULT_Kp 29.34
+  #define DEFAULT_Ki 3.73
+  #define DEFAULT_Kd 57.67
+
+  
 #endif // PIDTEMP
 
 //===========================================================================
@@ -649,7 +663,8 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.60, 100.90, 400, 520 }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.60, 100.90, 400, 520 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 101.44, 101.24, 400, 520 }
 // Steps per unit for x/y adjusted over a series of 20x20 calibration cubes.
 // Z axis based on TR8-2 physical properties, caliper measurements confirm.
 // Extruder settings were derived from multiple attempts at tuning extrusion
@@ -833,7 +848,7 @@
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_SLOW HOMING_FEEDRATE_Z * 2
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
@@ -856,10 +871,10 @@
  */
 #define Z_CLEARANCE_DEPLOY_PROBE    0 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
-#define Z_CLEARANCE_MULTI_PROBE     0.5 // Z Clearance between multiple probes
+#define Z_CLEARANCE_MULTI_PROBE     0.4 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
 
-#define Z_PROBE_LOW_POINT          -4 // Farthest distance below the trigger-point to go before stopping
+#define Z_PROBE_LOW_POINT          -3 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
 #define Z_PROBE_OFFSET_RANGE_MIN -10
@@ -931,7 +946,7 @@
 #define Z_MIN_POS 0.1
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 205
+#define Z_MAX_POS 215
 
 /**
  * Software Endstops
@@ -1230,9 +1245,9 @@
 #define SKEW_CORRECTION
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
-  #define XY_DIAG_AC 141.72
-  #define XY_DIAG_BD 141.88
-  #define XY_SIDE_AD 100.15
+  #define XY_DIAG_AC 140.55
+  #define XY_DIAG_BD 140.44
+  #define XY_SIDE_AD 99.90
   // AB = 100.385376923
   
 
@@ -1242,13 +1257,13 @@
 
   #define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
-    #define XZ_DIAG_AC 141.35
-    #define XZ_DIAG_BD 142.14
-    #define XZ_SIDE_AD 100.08
+    #define XZ_DIAG_AC 141.50
+    #define XZ_DIAG_BD 142.59
+    #define XZ_SIDE_AD 100.93
 
-    #define YZ_DIAG_AC 140.93
-    #define YZ_DIAG_BD 142.69
-    #define YZ_SIDE_AD 100.08
+    #define YZ_DIAG_AC 143.15
+    #define YZ_DIAG_BD 140.36
+    #define YZ_SIDE_AD 100.68
    
     //#define XZ_SKEW_FACTOR 0.0
     //#define YZ_SKEW_FACTOR 0.0

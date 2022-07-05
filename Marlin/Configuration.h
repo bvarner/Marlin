@@ -823,6 +823,9 @@
  *   #define X_PROBE_OFFSET_FROM_EXTRUDER 10
  *   #define Y_PROBE_OFFSET_FROM_EXTRUDER 10
  *
+ *
+ *
+ *
  *      +-- BACK ---+
  *      |           |
  *    L |    (+) P  | R <-- probe (20,20)
@@ -845,10 +848,10 @@
 #define XY_PROBE_SPEED 12000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z * 2
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW HOMING_FEEDRATE_Z * 2
+#define Z_PROBE_SPEED_SLOW HOMING_FEEDRATE_Z * 3
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
@@ -1078,9 +1081,9 @@
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 5
-  #define GRID_MAX_POINTS_Y 5
-
+  #define GRID_MAX_POINTS_X 7
+  #define GRID_MAX_POINTS_Y 7
+  
   // Set the boundaries for probing (where the probe can reach).
   #define LEFT_PROBE_BED_POSITION 24
   #define RIGHT_PROBE_BED_POSITION 228
@@ -1103,7 +1106,7 @@
     #define ABL_BILINEAR_SUBDIVISION
     #if ENABLED(ABL_BILINEAR_SUBDIVISION)
       // Number of subdivisions between probe points
-      #define BILINEAR_SUBDIVISIONS 3
+      #define BILINEAR_SUBDIVISIONS 1
     #endif
 
   #endif
@@ -1208,8 +1211,8 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (4500)
-#define HOMING_FEEDRATE_Z  (1800)
+#define HOMING_FEEDRATE_XY (9000)
+#define HOMING_FEEDRATE_Z  (3600)
 
 // @section calibrate
 
@@ -1257,20 +1260,20 @@
 
   #define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
-    #define XZ_DIAG_AC 141.50
-    #define XZ_DIAG_BD 142.59
-    #define XZ_SIDE_AD 100.93
+//    #define XZ_DIAG_AC 141.50
+//    #define XZ_DIAG_BD 142.59
+//    #define XZ_SIDE_AD 100.93
 
-    #define YZ_DIAG_AC 143.15
-    #define YZ_DIAG_BD 140.36
-    #define YZ_SIDE_AD 100.68
+//    #define YZ_DIAG_AC 143.15
+//    #define YZ_DIAG_BD 140.36
+//    #define YZ_SIDE_AD 100.68
    
-    //#define XZ_SKEW_FACTOR 0.0
-    //#define YZ_SKEW_FACTOR 0.0
+      #define XZ_SKEW_FACTOR 0.0
+      #define YZ_SKEW_FACTOR 0.0
   #endif
 
   // Enable this option for M852 to set skew at runtime
-  #define SKEW_CORRECTION_GCODE
+  //  #define SKEW_CORRECTION_GCODE
 #endif
 
 //=============================================================================

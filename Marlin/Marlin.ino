@@ -1,4 +1,5 @@
-/*
+
+ /*
 ================================================================================
 
   Marlin Firmware
@@ -28,7 +29,7 @@ Configuration
   - https://www.youtube.com/watch?v=3gwWVFtdg-4
     A good 20-minute overview of Marlin configuration by Tom Sanladerer.
     (Applies to Marlin 1.0.x, so Jerk and Acceleration should be halved.)
-    Also... https://www.google.com/search?tbs=vid%3A1&q=configure+marlin
+    Also... https://www.google.com/search?tbs=vid%3A1&q=configure+marli
 
   - http://marlinfw.org/docs/configuration/configuration.html
     Marlin's configuration options are explained in more detail here.

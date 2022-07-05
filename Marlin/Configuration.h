@@ -1260,16 +1260,16 @@
 
   #define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
-//    #define XZ_DIAG_AC 141.50
-//    #define XZ_DIAG_BD 142.59
-//    #define XZ_SIDE_AD 100.93
+    #define XZ_DIAG_AC 141.85
+    #define XZ_DIAG_BD 142.02
+    #define XZ_SIDE_AD 100.98
 
-//    #define YZ_DIAG_AC 143.15
-//    #define YZ_DIAG_BD 140.36
-//    #define YZ_SIDE_AD 100.68
+    #define YZ_DIAG_AC 138.69
+    #define YZ_DIAG_BD 144.50
+    #define YZ_SIDE_AD 100.65
    
-      #define XZ_SKEW_FACTOR 0.0
-      #define YZ_SKEW_FACTOR 0.0
+//      #define XZ_SKEW_FACTOR 0.0
+//      #define YZ_SKEW_FACTOR 0.0
   #endif
 
   // Enable this option for M852 to set skew at runtime

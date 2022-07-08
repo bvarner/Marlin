@@ -664,7 +664,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.60, 100.90, 400, 520 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 101.44, 101.24, 400, 520 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.32, 100.44, 400, 520 }
 // Steps per unit for x/y adjusted over a series of 20x20 calibration cubes.
 // Z axis based on TR8-2 physical properties, caliper measurements confirm.
 // Extruder settings were derived from multiple attempts at tuning extrusion
@@ -1248,9 +1248,9 @@
 #define SKEW_CORRECTION
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
-  #define XY_DIAG_AC 140.55
-  #define XY_DIAG_BD 140.44
-  #define XY_SIDE_AD 99.90
+  #define XY_DIAG_AC 142.75
+  #define XY_DIAG_BD 143.05
+  #define XY_SIDE_AD 101.12
   // AB = 100.385376923
   
 

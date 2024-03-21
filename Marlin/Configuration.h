@@ -413,16 +413,23 @@
   //#define DEFAULT_Kd 70.91
 
   // RAMPS 1.6, E3d V6 Knockoff with silicone sock, skelestruder rockwool top.
-  // M393 C9 E0 S250
+  // M303 C9 E0 S250
   //#define DEFAULT_Kp 48.89
   //#define DEFAULT_Ki 8.65
   //#define DEFAULT_Kd 69.09
 
   // RAMPS 1.6, E3d V6 Knockoff, 12v 40W heater, skelestruder rockwool top.
-  // M393 C9 E0 S250
-  #define DEFAULT_Kp 29.34
-  #define DEFAULT_Ki 3.73
-  #define DEFAULT_Kd 57.67
+  // M303 C9 E0 S250
+  //#define DEFAULT_Kp 29.34
+  //#define DEFAULT_Ki 3.73
+  //#define DEFAULT_Kd 57.67
+
+  // RAMPS 1.6 Volcano Knockoff. 12v ?? Heater Skelestruder no rockwool. This one fails to heat while the cooling fan is on.
+  // M106 P0 S100 (turn on part cooling fan)
+  // M303 C9 E0 S255 (9 cycle PID autotune)
+  #define DEFAULT_Kp 11.85
+  #define DEFAULT_Ki 0.57
+  #define DEFAULT_Kd 62.15
 
   
 #endif // PIDTEMP
@@ -706,10 +713,10 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define DEFAULT_XJERK                 7.0
-#define DEFAULT_YJERK                 7.0
-#define DEFAULT_ZJERK                 0.5
-#define DEFAULT_EJERK                 2.5
+#define DEFAULT_XJERK                 10.0
+#define DEFAULT_YJERK                 10.0
+#define DEFAULT_ZJERK                 0.4
+#define DEFAULT_EJERK                 4.5
 
 /**
  * S-Curve Acceleration
@@ -856,7 +863,7 @@
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
 //   Set to 3 or more for slow probes, averaging the results.
-#define MULTIPLE_PROBING 7
+#define MULTIPLE_PROBING 5
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1248,32 +1255,38 @@
 #define SKEW_CORRECTION
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
+<<<<<<< HEAD
   #define XY_DIAG_AC 142.75
   #define XY_DIAG_BD 143.05
   #define XY_SIDE_AD 101.12
+=======
+  //#define XY_DIAG_AC 140.55
+  //#define XY_DIAG_BD 140.44
+  //#define XY_SIDE_AD 99.90
+>>>>>>> 2b228a408c1a88d71985d1893bbc9df32778c29d
   // AB = 100.385376923
   
 
   // Or, set the default skew factors directly here
   // to override the above measurements:
-  //#define XY_SKEW_FACTOR 0.0
+  #define XY_SKEW_FACTOR 0.0
 
   #define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
-    #define XZ_DIAG_AC 141.85
-    #define XZ_DIAG_BD 142.02
-    #define XZ_SIDE_AD 100.98
+    //#define XZ_DIAG_AC 141.85
+    //#define XZ_DIAG_BD 142.02
+    //#define XZ_SIDE_AD 100.98
 
-    #define YZ_DIAG_AC 138.69
-    #define YZ_DIAG_BD 144.50
-    #define YZ_SIDE_AD 100.65
+    //#define YZ_DIAG_AC 138.69
+    //#define YZ_DIAG_BD 144.50
+    //#define YZ_SIDE_AD 100.65
    
-//      #define XZ_SKEW_FACTOR 0.0
-//      #define YZ_SKEW_FACTOR 0.0
+      #define XZ_SKEW_FACTOR 0.0
+      #define YZ_SKEW_FACTOR 0.0
   #endif
 
   // Enable this option for M852 to set skew at runtime
-    #define SKEW_CORRECTION_GCODE
+  #define SKEW_CORRECTION_GCODE
 #endif
 
 //=============================================================================

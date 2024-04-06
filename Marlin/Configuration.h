@@ -670,8 +670,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.60, 100.90, 400, 520 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.32, 100.44, 400, 520 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 520 }
 // Steps per unit for x/y adjusted over a series of 20x20 calibration cubes.
 // Z axis based on TR8-2 physical properties, caliper measurements confirm.
 // Extruder settings were derived from multiple attempts at tuning extrusion

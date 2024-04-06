@@ -1254,15 +1254,9 @@
 #define SKEW_CORRECTION
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
-<<<<<<< HEAD
-  #define XY_DIAG_AC 142.75
-  #define XY_DIAG_BD 143.05
-  #define XY_SIDE_AD 101.12
-=======
   //#define XY_DIAG_AC 140.55
   //#define XY_DIAG_BD 140.44
   //#define XY_SIDE_AD 99.90
->>>>>>> 2b228a408c1a88d71985d1893bbc9df32778c29d
   // AB = 100.385376923
   
 

@@ -351,11 +351,11 @@
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
 #define HEATER_0_MAXTEMP 305
-#define HEATER_1_MAXTEMP 275
-#define HEATER_2_MAXTEMP 275
-#define HEATER_3_MAXTEMP 275
-#define HEATER_4_MAXTEMP 275
-#define BED_MAXTEMP 125
+#define HEATER_1_MAXTEMP 305
+#define HEATER_2_MAXTEMP 305
+#define HEATER_3_MAXTEMP 305
+#define HEATER_4_MAXTEMP 305
+#define BED_MAXTEMP 100
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -1088,8 +1088,8 @@
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 7
-  #define GRID_MAX_POINTS_Y 7
+  #define GRID_MAX_POINTS_X 5
+  #define GRID_MAX_POINTS_Y 5
   
   // Set the boundaries for probing (where the probe can reach).
   #define LEFT_PROBE_BED_POSITION 24
@@ -1263,7 +1263,7 @@
 
   // Or, set the default skew factors directly here
   // to override the above measurements:
-  #define XY_SKEW_FACTOR 0.0
+  #define XY_SKEW_FACTOR -0.003
 
   #define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
@@ -1275,8 +1275,8 @@
     //#define YZ_DIAG_BD 144.50
     //#define YZ_SIDE_AD 100.65
    
-      #define XZ_SKEW_FACTOR 0.0
-      #define YZ_SKEW_FACTOR 0.0
+      #define XZ_SKEW_FACTOR 0.004
+      #define YZ_SKEW_FACTOR -0.014
   #endif
 
   // Enable this option for M852 to set skew at runtime

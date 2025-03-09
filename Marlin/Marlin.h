@@ -84,8 +84,13 @@ extern const char axis_codes[XYZE];
   #define  enable_Z() do{ Z_ENABLE_WRITE( Z_ENABLE_ON); Z2_ENABLE_WRITE(Z_ENABLE_ON); }while(0)
   #define disable_Z() do{ Z_ENABLE_WRITE(!Z_ENABLE_ON); Z2_ENABLE_WRITE(!Z_ENABLE_ON); CBI(axis_known_position, Z_AXIS); }while(0)
 #elif HAS_Z_ENABLE
-  #define  enable_Z() Z_ENABLE_WRITE( Z_ENABLE_ON)
-  #define disable_Z() do{ Z_ENABLE_WRITE(!Z_ENABLE_ON); CBI(axis_known_position, Z_AXIS); }while(0)
+  #if defined(Z_AXIS_ALWAYS_ON)
+    #define  enable_Z() Z_ENABLE_WRITE( Z_ENABLE_ON)
+    #define disable_Z() {}
+  #else
+    #define  enable_Z() Z_ENABLE_WRITE( Z_ENABLE_ON)
+    #define disable_Z() do{ Z_ENABLE_WRITE(!Z_ENABLE_ON); CBI(axis_known_position, Z_AXIS); }while(0)
+  #endif
 #else
   #define  enable_Z() NOOP
   #define disable_Z() NOOP

@@ -626,7 +626,7 @@
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
-//#define ENDSTOP_INTERRUPTS_FEATURE
+#define ENDSTOP_INTERRUPTS_FEATURE
 
 /**
  * Endstop Noise Filter
@@ -1092,7 +1092,7 @@
   
   // Set the boundaries for probing (where the probe can reach).
   #define LEFT_PROBE_BED_POSITION 26
-  #define RIGHT_PROBE_BED_POSITION 250
+  #define RIGHT_PROBE_BED_POSITION 245
   #define FRONT_PROBE_BED_POSITION 6
   #define BACK_PROBE_BED_POSITION 210
 
